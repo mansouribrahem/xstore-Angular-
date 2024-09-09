@@ -1,0 +1,34 @@
+<div class="container my-5">
+  <h1 class="text-center">Our Products</h1>
+  <input
+    type="text"
+    class="form-control w-50 mx-auto mb-1"
+    placeholder="Search "
+    [(ngModel)]="searchKey"
+  />
+  <div class="row">
+    <div
+      class="col-md-2 mb-3"
+      *ngFor="let product of productsList | searchProduct : searchKey"
+    >
+      <img class="w-100" [src]="product.imageCover" [alt]="product.title" />
+      <div class="mt-2">
+        <h6 class="text-center">{{ product.title }}</h6>
+        <h6 class="text-center">
+          {{ product.price | currency : "L.E " }}
+        </h6>
+        <p class="text-center">{{ product.category.name }}</p>
+      </div>
+      <button
+        class="btn btn-success me-2"
+        routerLink="/details"
+        [queryParams]="{ id: product.id }"
+      >
+        View
+      </button>
+      <button class="btn btn-success" (click)="addToCart(product.id)">
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

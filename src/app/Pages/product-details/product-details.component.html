@@ -1,0 +1,29 @@
+<div class="card mb-3 mx-auto mt-5" style="max-width: 840px; max-height: 400px">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <img
+        class="img-fluid"
+        height="350"
+        [src]="product.imageCover"
+        class="card-img"
+        [alt]="product.title"
+        style="object-fit: contain"
+      />
+    </div>
+    <div class="col-md-6 text-start">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <h4 class="card-title">{{ product.price | currency : "L.E " }}</h4>
+        <p class="card-text">
+          {{ product.description }}
+        </p>
+        <p class="card-text">
+          <small class="text-muted">{{ product.category.name }}</small>
+        </p>
+        <button class="btn btn-success" (click)="addToCart(product.id)">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

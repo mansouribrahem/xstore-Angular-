@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Cart Details</h2>
+  <div
+    class="d-flex justify-content-around bg-light-subtle"
+    *ngIf="cartDetails?.data"
+  >
+    <h4>Total Items: {{ cartDetails.numOfCartItems }}</h4>
+    <h4>Total Price: EGP {{ cartDetails.data.totalCartPrice }}</h4>
+  </div>
+
+  <div class="row my-5" *ngFor="let product of cartDetails?.data?.products">
+    <div *ngIf="product?.product" class="col-2">
+      <img class="w-100" [src]="product.product.imageCover" alt="" />
+    </div>
+    <div class="col-8 mt-2">
+      <p>Title: {{ product.product.title }}</p>
+      <p>Price: EGP {{ product.price }}</p>
+      <p>Category: {{ product.product.category.name }}</p>
+      <button
+        (click)="removeCartItem(product.product.id)"
+        class="btn btn-outline-danger"
+      >
+        Remove
+      </button>
+    </div>
+
+    <div class="col-2">
+      <p class="m-4">Count</p>
+      <button
+        (click)="updateProductCount(product.product.id, product.count - 1)"
+        class="btn btn-outline-success m-2"
+      >
+        -
+      </button>
+      <span>{{ product.count }}</span>
+      <button
+        (click)="updateProductCount(product.product.id, product.count + 1)"
+        class="btn btn-outline-success m-2"
+      >
+        +
+      </button>
+    </div>
+  </div>
+</div>

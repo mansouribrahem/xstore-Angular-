@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="w-75 mx-auto">
+    <div *ngIf="errMessage" class="alert alert-danger">{{ errMessage }}</div>
+    <h1 class="mt-4">Register Now</h1>
+
+    <form [formGroup]="registerFrom" (ngSubmit)="signUp(registerFrom)">
+      <div class="form-group mb-2">
+        <label for="fullName">Full Name</label>
+        <input
+          formControlName="name"
+          type="text"
+          id="fullName"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            registerFrom.get('name')?.getError('required') &&
+            registerFrom.get('name')?.touched
+          "
+          class="alert alert-danger p-0"
+        >
+          <p class="m-0 ps-3">Name is required.</p>
+        </div>
+        <div
+          *ngIf="registerFrom.get('name')?.getError('maxlength')"
+          class="p-0 alert alert-danger"
+        >
+          <p class="m-0 ps-3">Max length is 20 chars.</p>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="email">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            registerFrom.get('email')?.getError('required') &&
+            registerFrom.get('email')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Email is required</p>
+        </div>
+
+        <div
+          *ngIf="
+            registerFrom.get('email')?.getError('email') &&
+            registerFrom.get('email')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Email is not valid</p>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="password">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            registerFrom.get('password')?.getError('required') &&
+            registerFrom.get('password')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Password is required</p>
+        </div>
+        <div
+          *ngIf="
+            registerFrom.get('password')?.getError('minlength') &&
+            registerFrom.get('password')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Min length is 6</p>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="rePassword">Confirm Password</label>
+        <input
+          formControlName="rePassword"
+          type="password"
+          id="rePassword"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            registerFrom.get('rePassword')?.getError('required') &&
+            registerFrom.get('rePassword')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="ps-3 m-0">Confirm password is required</p>
+        </div>
+        <div
+          *ngIf="
+            registerFrom.get('rePassword')?.getError('minlength') &&
+            registerFrom.get('rePassword')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Min length is 6</p>
+        </div>
+      </div>
+      <div class="form-group mb-2">
+        <label for="phone">Phone</label>
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          class="form-control"
+        />
+        <div
+          *ngIf="
+            registerFrom.get('phone')?.getError('required') &&
+            registerFrom.get('phone')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Phone is required</p>
+        </div>
+        <div
+          *ngIf="
+            registerFrom.get('phone')?.getError('pattern') &&
+            registerFrom.get('phone')?.touched
+          "
+          class="alert alert-danger p-0 m-0"
+        >
+          <p class="m-0 ps-3">Pattern not matched.</p>
+        </div>
+      </div>
+      <button [disabled]="registerFrom.invalid" class="btn btn-success">
+        <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin"></i>
+        <span *ngIf="!isLoading">Register</span>
+      </button>
+    </form>
+  </div>
+</div>
